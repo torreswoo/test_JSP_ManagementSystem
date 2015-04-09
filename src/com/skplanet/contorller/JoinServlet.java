@@ -39,8 +39,7 @@ public class JoinServlet extends HttpServlet {
 	/** 회원정보를 DB에 추가하는 서블릿 
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		String name = request.getParameter("name");
 		String userid = request.getParameter("userid");
@@ -56,16 +55,15 @@ public class JoinServlet extends HttpServlet {
 		mVo.setPhone(phone);
 		mVo.setAdmin(Integer.parseInt(admin));
 		MemberDAO mDao = MemberDAO.getInstance();
-		int result = mDao.insertMember(mVo);
+		int result = mDao.insertMember(mVo);//[DB]
 		HttpSession session = request.getSession();
 		if (result == 1) {
-			session.setAttribute("userid", mVo.getUserid());
+			session.setAttribute("userid", mVo.getUserid()); //[DB]
 			request.setAttribute("message", "회원 가입에 성공했습니다.");
 		} else {
 			request.setAttribute("message", "회원 가입에 실패했습니다.");
 		}
-		RequestDispatcher dispatcher = request
-				.getRequestDispatcher("member/login.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("member/login.jsp");
 		dispatcher.forward(request, response);
 	}
 

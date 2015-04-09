@@ -79,6 +79,7 @@ public class MemberDAO {
 		return result;
 	}
 	
+	// member테이블에서 아이디로 해당 회원을 찾아 정보를 가져
 	public MemberVO getMember(String userid){
 		MemberVO mVo = null;
 		String sql = "select * from member where userid=?";
@@ -117,7 +118,7 @@ public class MemberDAO {
 		return mVo;
 	}
 	
-	//아이디 중복체크를 위한 메소드추가
+	// 회원가입시 아이디 중복체크를 위한 메소드추가
 	public int confirmID(String userid){
 		int result = -1;
 		Connection conn = null;
@@ -156,7 +157,7 @@ public class MemberDAO {
 		return result;		
 	}
 	
-	// 회원정보를 DB에 추가하기위한 메소드 추
+	// 회원정보를 DB에 추가하기위한 메소드 
 	public int insertMember(MemberVO mVo) {
 		int result = -1;
 		String sql = "insert into member values(?, ?, ?, ?, ?, ?)";
@@ -190,8 +191,7 @@ public class MemberDAO {
 	// 회원정보수정을 위한 
 	public int updateMember(MemberVO mVo) {
 		int result = -1;
-		String sql = "update member set pwd=?, email=?,"
-				+ "phone=?, admin=? where userid=?";
+		String sql = "update member set pwd=?, email=?, phone=?, admin=? where userid=?";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try {

@@ -31,8 +31,7 @@ public class LoginServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "member/login.jsp";
 		HttpSession session = request.getSession();
 		if (session.getAttribute("loginUser") != null) {// 이미 로그인 된 사용자이면
@@ -43,7 +42,7 @@ public class LoginServlet extends HttpServlet {
 	}
 
 
-	/**
+	/** 
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -53,13 +52,13 @@ public class LoginServlet extends HttpServlet {
 		String pwd = request.getParameter("pwd");
 		
 		MemberDAO mDao = MemberDAO.getInstance();
-		int result = mDao.userCheck(userid, pwd); //DB에서 check
+		int result = mDao.userCheck(userid, pwd); //[DB] 사용자 인증을 위한 select
 		if(result ==1){
-			MemberVO mVo = mDao.getMember(userid);
+			MemberVO mVo = mDao.getMember(userid); // [DB] 회원의 정보 select
 			HttpSession session = request.getSession(); // session 생성 
 			session.setAttribute("loginUser", mVo);
 			request.setAttribute("message", "회원가입에 성공");
-			url = "main.jsp";
+			url = "main.jsp";// main.jsp로 forward
 		}
 		else if(result ==0){
 			request.setAttribute("message", "비밀번호가 맞지않습니다.");

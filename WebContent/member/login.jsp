@@ -4,7 +4,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>회원관</title>
+	<title>회원관리</title>
 	<script type="text/javascript" src="script/member.js"></script>
 </head>
 

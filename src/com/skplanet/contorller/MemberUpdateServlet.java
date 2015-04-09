@@ -31,14 +31,12 @@ public class MemberUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userid = request.getParameter("userid");
 		MemberDAO mDao = MemberDAO.getInstance();
-		MemberVO mVo = mDao.getMember(userid);
+		MemberVO mVo = mDao.getMember(userid);  // [DB]
 		request.setAttribute("mVo", mVo);
-		RequestDispatcher dispatcher = request
-				.getRequestDispatcher("member/memberUpdate.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("member/memberUpdate.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -46,8 +44,7 @@ public class MemberUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8"); // 한글 깨짐을 방지
 		// 폼에서 입력한 회원 정보 얻어오기
 		String userid = request.getParameter("userid");
@@ -63,7 +60,7 @@ public class MemberUpdateServlet extends HttpServlet {
 		mVo.setPhone(phone);
 		mVo.setAdmin(Integer.parseInt(admin));
 		MemberDAO mDao = MemberDAO.getInstance();
-		mDao.updateMember(mVo);
+		mDao.updateMember(mVo);		//	[DB]
 		response.sendRedirect("login.do");
 	}
 
